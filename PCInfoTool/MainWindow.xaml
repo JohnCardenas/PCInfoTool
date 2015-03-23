@@ -101,15 +101,25 @@
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="UserSessionLayout">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
                 <!-- Logged on User -->
                 <Label   Grid.Row="0" Grid.Column="0" Content="Logged on User" Style="{StaticResource lblStyle}"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Name="txtLoggedOnUser" Style="{StaticResource txtStyle}"/>
+                
+                <!-- Password Last Changed -->
+                <Label Grid.Row="1" Grid.Column="0" Content="Password Last Changed" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="txtPwdLastChanged" Style="{StaticResource txtStyle}"/>
+                
+                <!-- Password expires -->
+                <Label Grid.Row="2" Grid.Column="0" Content="Password Expires" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="txtPwdExpires" Style="{StaticResource txtStyle}"/>
             </Grid>
         </GroupBox>
         <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="WrapWithOverflow" Margin="5" Name="txbDescription">

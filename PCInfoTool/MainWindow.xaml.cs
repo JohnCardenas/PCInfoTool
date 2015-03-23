@@ -2,6 +2,8 @@
 using System.Configuration;
 using System.Collections.Generic;
 using System.DirectoryServices;
+using System.DirectoryServices.ActiveDirectory;
+using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -131,6 +133,41 @@ namespace PCInfoTool
         }
 
         /// <summary>
+        /// Fetches password expiry data from AD, calculates the next time the logged on user's password will expire, then populates the appropriate text boxes
+        /// </summary>
+        /// <param name="domain"></param>
+        private void GetPasswordExpirationData(string domain)
+        {
+            try
+            {
+                long pwdLastSet, pwdMaxAge;
+
+                // Fetch the last time the user set his/her password
+                string accountName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                using (DirectorySearcher searcher = new DirectorySearcher("(SAMAccountName=" + accountName.Substring(accountName.IndexOf('\\') + 1) + ")"))
+                {
+                    SearchResult user = searcher.FindOne();
+                    pwdLastSet = Math.Abs((long)user.Properties["pwdlastset"][0]);
+                }
+
+                // Fetch the domain password expiration value
+                using(Domain d = Domain.GetCurrentDomain())
+                {
+                    DirectorySearcher ds = new DirectorySearcher(d.GetDirectoryEntry(), "(objectClass=*)", null, SearchScope.Base);
+                    SearchResult sr = ds.FindOne();
+
+                    pwdMaxAge = Math.Abs((long)sr.Properties["maxPwdAge"][0]);
+                }
+
+                // Calculate expiry and display
+                long expiry = pwdLastSet + pwdMaxAge;
+                txtPwdLastChanged.Text = DateTime.FromFileTime(pwdLastSet).ToString("g");
+                txtPwdExpires.Text = DateTime.FromFileTime(expiry).ToString("g");
+            }
+            catch { }
+        }
+
+        /// <summary>
         /// Window load event handler
         /// </summary>
         /// <param name="sender"></param>
@@ -158,11 +195,18 @@ namespace PCInfoTool
             string checkDomain = ReadStringSetting(SETTING_CHECK_DOMAIN);
             if (!(string.IsNullOrEmpty(checkDomain)))
             {
-                txtCompanyNetwork.Text = DomainExists(checkDomain) ? "Connected" : "Not Connected";
+                bool domainConnected = DomainExists(checkDomain);
+
+                txtCompanyNetwork.Text = domainConnected ? "Connected" : "Not Connected";
+
+                if (domainConnected)
+                    GetPasswordExpirationData(checkDomain);
             }
             else
             {
                 HideGridControlRow(txtCompanyNetwork, NetworkLayout);
+                HideGridControlRow(txtPwdLastChanged, UserSessionLayout);
+                HideGridControlRow(txtPwdExpires, UserSessionLayout);
             }
         }
     }
