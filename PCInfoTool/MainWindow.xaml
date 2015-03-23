@@ -19,18 +19,12 @@
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0,4"/>
         </Style>
-        <Style x:Key="lblHeaderStyle" TargetType="Label">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Padding" Value="0, 2"/>
-        </Style>
         <Style x:Key="grpStyle" TargetType="GroupBox">
             <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
     <Grid x:Name="MainLayout">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -38,8 +32,7 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="PC Info Tool" HorizontalAlignment="Center" Style="{StaticResource lblHeaderStyle}" Name="txtHeader"/>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Network" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Network" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="NetworkLayout">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
@@ -74,7 +67,7 @@
                 <TextBox Grid.Row="4" Grid.Column="1" Name="txtCompanyNetwork" Style="{StaticResource txtSingleLineStyle}"/>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Computer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="Computer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="ComputerLayout">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
@@ -109,7 +102,7 @@
                 <TextBox Grid.Row="4" Grid.Column="1" Name="txtSMBIOS" Style="{StaticResource txtSingleLineStyle}"/>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="2" Grid.Column="0" Header="User Session" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="User Session" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="UserSessionLayout">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
@@ -134,7 +127,7 @@
                 <TextBox Grid.Row="2" Grid.Column="1" Name="txtPwdExpires" Style="{StaticResource txtSingleLineStyle}"/>
             </Grid>
         </GroupBox>
-        <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="WrapWithOverflow" Margin="5" Name="txbDescription">
+        <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="WrapWithOverflow" Margin="5" Name="txbDescription">
         </TextBlock>
     </Grid>
 </Window>

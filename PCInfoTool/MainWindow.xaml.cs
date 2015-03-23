@@ -24,12 +24,14 @@ namespace PCInfoTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        const string SETTING_TXT_HEADER      = "HeaderText";
-        const string SETTING_TXT_DESCRIPTION = "DescriptionText";
-        const string SETTING_SHOW_IPV4_ADDR  = "ShowIPv4Addresses";
-        const string SETTING_SHOW_IPV6_ADDR  = "ShowIPv6Addresses";
-        const string SETTING_SHOW_MAC_ADDR   = "ShowMACAddresses";
-        const string SETTING_CHECK_DOMAIN    = "CheckDomain";
+        const string SETTING_WINDOW_ALWAYS_ON_TOP = "AlwaysOnTop";
+        const string SETTING_WINDOW_TITLE         = "WindowTitle";
+        const string SETTING_TXT_HEADER           = "HeaderText";
+        const string SETTING_TXT_DESCRIPTION      = "DescriptionText";
+        const string SETTING_SHOW_IPV4_ADDR       = "ShowIPv4Addresses";
+        const string SETTING_SHOW_IPV6_ADDR       = "ShowIPv6Addresses";
+        const string SETTING_SHOW_MAC_ADDR        = "ShowMACAddresses";
+        const string SETTING_CHECK_DOMAIN         = "CheckDomain";
 
         /// <summary>
         /// Constructor
@@ -188,7 +190,6 @@ namespace PCInfoTool
 
             txtLoggedOnUser.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-            txtHeader.Content = ReadStringSetting(SETTING_TXT_HEADER);
             txbDescription.Text = ReadStringSetting(SETTING_TXT_DESCRIPTION);
 
             // Check domain
@@ -208,6 +209,9 @@ namespace PCInfoTool
                 HideGridControlRow(txtPwdLastChanged, UserSessionLayout);
                 HideGridControlRow(txtPwdExpires, UserSessionLayout);
             }
+
+            this.Topmost = ReadBooleanSetting(SETTING_WINDOW_ALWAYS_ON_TOP);
+            this.Title = ReadStringSetting(SETTING_WINDOW_TITLE);
         }
     }
 }
