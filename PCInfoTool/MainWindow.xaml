@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="PC Info" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Icon="PCInfo.ico" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Window.Resources>
-        <Style x:Key="txtStyle" TargetType="TextBox">
+        <Style x:Key="txtSingleLineStyle" TargetType="TextBox">
             <Setter Property="Margin" Value="0,2"/>
             <Setter Property="IsReadOnly" Value="True"/>
+        </Style>
+        <Style x:Key="txtMultiLineStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
         </Style>
         <Style x:Key="lblStyle" TargetType="Label">
             <Setter Property="VerticalAlignment" Value="Top"/>
@@ -48,23 +55,23 @@
                 
                 <!-- Host name row -->
                 <Label   Grid.Row="0" Grid.Column="0" Content="Host Name" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Name="txtHostName" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="txtHostName" Style="{StaticResource txtSingleLineStyle}"/>
                 
                 <!-- IPv4 addresses row -->
                 <Label   Grid.Row="1" Grid.Column="0" Content="IPv4 Addresses" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="txtIPv4Addresses" Style="{StaticResource txtStyle}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="txtIPv4Addresses" Style="{StaticResource txtMultiLineStyle}"/>
                 
                 <!-- IPv6 addresses row -->
                 <Label Grid.Row="2" Grid.Column="0" Content="IPv6 Addresses" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Name="txtIPv6Addresses" Style="{StaticResource txtStyle}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="txtIPv6Addresses" Style="{StaticResource txtMultiLineStyle}"/>
                 
                 <!-- MAC addresses row -->
                 <Label   Grid.Row="3" Grid.Column="0" Content="MAC Addresses" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Name="txtMACAddresses" Style="{StaticResource txtStyle}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Name="txtMACAddresses" Style="{StaticResource txtMultiLineStyle}"/>
                 
                 <!-- Company network row -->
                 <Label   Grid.Row="4" Grid.Column="0" Content="Company Network" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Name="txtCompanyNetwork" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Name="txtCompanyNetwork" Style="{StaticResource txtSingleLineStyle}"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Computer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
@@ -83,23 +90,23 @@
                 
                 <!-- Computer manufacturer -->
                 <Label   Grid.Row="0" Grid.Column="0" Content="Manufacturer" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Name="txtManufacturer" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="txtManufacturer" Style="{StaticResource txtSingleLineStyle}"/>
                 
                 <!-- Computer model -->
                 <Label   Grid.Row="1" Grid.Column="0" Content="Model" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="txtModel" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="txtModel" Style="{StaticResource txtSingleLineStyle}"/>
                 
                 <!-- Computer serial number -->
                 <Label   Grid.Row="2" Grid.Column="0" Content="Serial Number" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Name="txtSerialNumber" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="txtSerialNumber" Style="{StaticResource txtSingleLineStyle}"/>
                 
                 <!-- Computer BIOS revision -->
                 <Label   Grid.Row="3" Grid.Column="0" Content="BIOS Revision" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Name="txtBIOSRev" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Name="txtBIOSRev" Style="{StaticResource txtSingleLineStyle}"/>
                 
                 <!-- Computer SMBIOS ID -->
                 <Label   Grid.Row="4" Grid.Column="0" Content="SMBIOS ID" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Name="txtSMBIOS" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Name="txtSMBIOS" Style="{StaticResource txtSingleLineStyle}"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Grid.Column="0" Header="User Session" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
@@ -116,15 +123,15 @@
                 
                 <!-- Logged on User -->
                 <Label   Grid.Row="0" Grid.Column="0" Content="Logged on User" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Name="txtLoggedOnUser" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="txtLoggedOnUser" Style="{StaticResource txtSingleLineStyle}"/>
                 
                 <!-- Password Last Changed -->
                 <Label Grid.Row="1" Grid.Column="0" Content="Password Last Changed" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="txtPwdLastChanged" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="txtPwdLastChanged" Style="{StaticResource txtSingleLineStyle}"/>
                 
                 <!-- Password expires -->
                 <Label Grid.Row="2" Grid.Column="0" Content="Password Expires" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Name="txtPwdExpires" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="txtPwdExpires" Style="{StaticResource txtSingleLineStyle}"/>
             </Grid>
         </GroupBox>
         <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="WrapWithOverflow" Margin="5" Name="txbDescription">
