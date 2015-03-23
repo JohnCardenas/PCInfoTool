@@ -26,17 +26,18 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="PC Info Tool" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="PC Info Tool" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Name="txtHeader"/>
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Network" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="NetworkLayout">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
+                    <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
@@ -46,19 +47,23 @@
                 
                 <!-- IPv4 addresses row -->
                 <Label   Grid.Row="1" Grid.Column="0" Content="IPv4 Addresses" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="txtIPv4Addresses" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="txtIPv4Addresses" Style="{StaticResource txtStyle}" TextWrapping="Wrap" AcceptsReturn="True"/>
                 
                 <!-- IPv6 addresses row -->
                 <Label Grid.Row="2" Grid.Column="0" Content="IPv6 Addresses" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Name="txtIPv6Addresses" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="txtIPv6Addresses" Style="{StaticResource txtStyle}" TextWrapping="Wrap" AcceptsReturn="True"/>
                 
                 <!-- MAC addresses row -->
                 <Label   Grid.Row="3" Grid.Column="0" Content="MAC Addresses" Style="{StaticResource lblStyle}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Name="txtMACAddresses" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource txtStyle}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Name="txtMACAddresses" Style="{StaticResource txtStyle}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                
+                <!-- Company network row -->
+                <Label   Grid.Row="4" Grid.Column="0" Content="Company Network" Style="{StaticResource lblStyle}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Name="txtCompanyNetwork" Style="{StaticResource txtStyle}"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Computer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="ComputerLayout">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="25"/>
@@ -67,7 +72,7 @@
                     <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
@@ -93,12 +98,12 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Grid.Column="0" Header="User Session" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource grpStyle}">
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="UserSessionLayout">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
@@ -107,8 +112,7 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Name="txtLoggedOnUser" Style="{StaticResource txtStyle}"/>
             </Grid>
         </GroupBox>
-        <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="WrapWithOverflow" Margin="5">
-            The PC Info Tool is deployed to computers to assist help desk staff in troubleshooting connections to user computers.
+        <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="WrapWithOverflow" Margin="5" Name="txbDescription">
         </TextBlock>
     </Grid>
 </Window>
