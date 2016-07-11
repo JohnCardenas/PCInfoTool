@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <!-- OS Architecture Detection -->
+  <?if $(var.Platform) = x64 ?>
+    <?define Win64 = "yes" ?>
+    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?else ?>
+    <?define Win64 = "no" ?>
+    <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?endif ?>
+
+  <Product Id="*" Name="PC Info Tool" Language="1033" Version="1.0.1.0" Manufacturer="(Your Company Here)" UpgradeCode="C6BE31BE-88D5-417C-86C4-6350F1FA6070">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Media Id="1" Cabinet="PCInfoTool.cab" EmbedCab="yes"/>
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+    <!-- Target directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="$(var.PlatformProgramFilesFolder)">
+        <Directory Id="Company_ProgramFiles" Name="Your Company Here">
+          <Directory Id="INSTALLDIR" Name="PC Info Tool" />
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder"/>
+      <Directory Id="DesktopFolder" Name="Desktop"/>
+    </Directory>
+
+    <!-- Installer icon -->
+    <Icon Id="icon.ico" SourceFile="$(var.PCInfoTool.ProjectDir)\PCInfo.ico"/>
+
+    <!-- Properties -->
+    <Property Id="ARPPRODUCTICON" Value="icon.ico"/>
+    <Property Id="WINDOWS64BIT" Admin="no" Value="$(var.Win64)"/>
+
+    <!-- Features -->
+    <Feature Id="ProductFeature" Title="PC Info Tool" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    <!-- UI -->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR"/>
+    <UI>
+      <UIRef Id="WixUI_InstallDir"/>
+
+      <!-- Skip license dialog -->
+      <Publish Dialog="WelcomeDlg"    Control="Next" Event="NewDialog" Value="InstallDirDlg" Order="2">1</Publish>
+      <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg"    Order="2">1</Publish>
+    </UI>
+
+    <!-- Install Prerequisite: .NET Framework 4.0 -->
+    <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED"/>
+    <Condition Message="This application requires .NET Framework 4.0. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED]]>
+    </Condition>
+	</Product>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLDIR" Source="$(var.PCInfoTool.ProjectDir)\bin\$(var.PCInfoTool.Configuration)">
+      <Component Id="PCInfoTool.exe_Component" Guid="*">
+        <File Id="PCInfoTool.exe" Vital="yes"/>
+        <Shortcut Id="DesktopShortcut" Name="PC Info" Icon="icon.ico" WorkingDirectory="INSTALLDIR" Advertise="yes" Directory="DesktopFolder"/>
+        <Shortcut Id="StartMenuShortcut" Name="PC Info" Icon="icon.ico" WorkingDirectory="INSTALLDIR" Advertise="yes" Directory="ProgramMenuFolder"/>
+      </Component>
+      <Component Id="PCInfoTool.exe.config_Component" Guid="*">
+        <File Id="PCInfoTool.exe.config" Vital="yes"/>
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
